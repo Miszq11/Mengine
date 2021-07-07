@@ -2,4 +2,5 @@ bin/*.o
 bin/src/*.o
 bin/deps/*.o
 SFML
+test
 *.txt
