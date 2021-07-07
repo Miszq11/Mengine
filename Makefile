@@ -8,11 +8,12 @@ dirs := src
 objdir :=bin
 objdirsrc :=bin/src
 objdirdeps :=bin/deps
-SRCS := $(shell find $(dirs) -name *.cpp)
+SRCS := $(shell find $(dirs) -name "*.cpp")
 #$(foreach dir, $(dirs),$(wildcard $(dir)/*.cpp))
 deps:= $(foreach dir, $(dirs),$(wildcard $(dir)/*.hpp))
 headers:= $(foreach dir, $(dirs),$(wildcard $(dir)/*.hpp))
-objssrc:= $(addprefix $(objdir)/,$(SRCS:=.o))
+objtemp := $(notdir $(SRCS))
+objssrc:= $(objtemp:%.cpp=$(objdirsrc)/%.o)
 #objsdeps:=$(addprefix $(objdirdeps)/,$($(SRCS:.hpp=.o): SRCS/%=%))
 
 #SRCS := $(foreach dir, SRCS,$(wildcard $(dir)/*.cpp))
@@ -29,10 +30,11 @@ bin/main.o: $(objssrc)
 	@echo "compiling main.o"
 	$(CXX_WINDOWS) -c main.cpp $(sfml_win) $(sfml_win_include) -o bin/main.o
 
-$(objdirsrc)/%.cpp.o: %.cpp
-	echo $SRCS
-	mkdir -p $(dir $@)
-	$(CXX_WINDOWS) -c $< $(sfml_win_include) -o $@
+$(objssrc): $(SRCS)
+	@echo
+	@echo $(basename $(notdir $@))
+	@echo $(shell find $(dirs) -name $(addsuffix ".cpp" , $(basename $(notdir $@))))
+	$(CXX_WINDOWS) -c $(shell find $(dirs) -name $(addsuffix ".cpp" , $(basename $(notdir $@)))) $(sfml_win_include) -o $@
 
 #$(objssrc): 
 #$(SRCS)
@@ -42,6 +44,9 @@ $(objdirsrc)/%.cpp.o: %.cpp
 
 clean:
 	@echo "cleaning"
+	@echo $(SRCS)
+	@echo $(objssrc)
+	@echo $(objtemp)
 	@find ./bin -name "*.o" -type f -delete -print
 	@echo "cleaning done"
 
