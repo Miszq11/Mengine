@@ -31,9 +31,9 @@ bin/main.o: $(objssrc)
 	$(CXX_WINDOWS) -c main.cpp $(sfml_win) $(sfml_win_include) -o bin/main.o
 
 $(objssrc): $(SRCS)
-	@echo
-	@echo $(basename $(notdir $@))
-	@echo $(shell find $(dirs) -name $(addsuffix ".cpp" , $(basename $(notdir $@))))
+#	@echo
+#	@echo $(basename $(notdir $@))
+#	@echo $(shell find $(dirs) -name $(addsuffix ".cpp" , $(basename $(notdir $@))))
 	$(CXX_WINDOWS) -c $(shell find $(dirs) -name $(addsuffix ".cpp" , $(basename $(notdir $@)))) $(sfml_win_include) -o $@
 
 #$(objssrc): 
