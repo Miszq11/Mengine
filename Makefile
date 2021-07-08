@@ -2,8 +2,8 @@ CXX_LINUX:= g++
 CXX_WINDOWS:= x86_64-w64-mingw32-g++-win32
 
 sfml_win:= -lsfml-graphics -lsfml-system -lsfml-window -std=c++2a -lstdc++
-sfml_include:= -I/mnt/c/SFML64/include
-sfml_link := -L/mnt/c/SFML64/lib
+sfml_include:= -ISFML/include
+sfml_link := -LSFML/lib
 static_flags:= -lstdc++  -lsfml-window-s -lsfml-graphics-s -lsfml-system-s -lstdc++ -DSFML_STATIC -static -lopengl32 -lwinmm -lgdi32 -lfreetype
 #-lsfml-window-s -lsfml-graphics-s -lsfml-system-s -lstdc++ -DSFML_STATIC -static -lopengl32 -lwinmm -lgdi32 -lfreetype
 CXXFLAGS += -std=c++2a
@@ -23,10 +23,11 @@ headers:= $(foreach dir, $(dirs),$(wildcard $(dir)/*.hpp))
 objtemp := $(notdir $(SOURCES))
 objssrc:= $(objtemp:%.cpp=$(objdirsrc)/%.o)
 
-tmptmp := $(objssrc:%=./%)
 windows_static: bin/main.o
+	@echo "------------------------------------------------------------------------------------------------------------------------------------------------------------"
 	@echo "compiling and linking with objects: $(objssrc)"
-	$(CXX_WINDOWS) bin/main.o $(objssrc) $(sfml_include) $(static_flags) $(sfml_link) -Wall -v -o windows_build.exe
+	@echo "------------------------------------------------------------------------------------------------------------------------------------------------------------"
+	$(CXX_WINDOWS) bin/main.o $(objssrc) $(sfml_include) $(static_flags) $(sfml_link) -Wall -o windows_build.exe
 
 windows: bin/main.o
 	@echo "uzywaj targetu windows_static, albo po prostu \"make\" "
@@ -38,7 +39,6 @@ bin/main.o: $(objssrc)
 
 bin/%.o : %.cpp
 	$(CXX_WINDOWS) -c $< $(sfml_include) $(sfml_link) $(static_flags) -Wall -o $@
-
 # $(shell find $(dirs) -name $(addsuffix ".cpp" , $(basename $(notdir $@))))
 #$(objssrc): $(SOURCES)
 #	@echo
