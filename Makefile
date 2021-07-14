@@ -22,23 +22,32 @@ headers:= $(foreach dir, $(dirs),$(wildcard $(dir)/*.hpp))
 # ^ not used
 objtemp := $(notdir $(SOURCES))
 objssrc:= $(objtemp:%.cpp=$(objdirsrc)/%.o)
+#some coloring stuff
+ccgreen := $(shell tput -Txterm setaf 2)
+ccyellow := $(shell tput -Txterm setaf 3)
+ccpurple := $(shell tput -Txterm setaf 5)
+ccreset := $(shell tput -Txterm sgr0)
 
 windows_static: bin/main.o
-	@echo "------------------------------------------------------------------------------------------------------------------------------------------------------------"
-	@echo "compiling and linking with objects: $(objssrc)"
-	@echo "------------------------------------------------------------------------------------------------------------------------------------------------------------"
+#	$(ccred)
+	@echo "${ccgreen}------------------------------------------------------------------------------------------------------------------------------------------------------------"
+	@echo "compiling and linking with objects: ${ccreset}$(objssrc)${ccgreen}"
+	@echo "------------------------------------------------------------------------------------------------------------------------------------------------------------${ccreset}"
 	$(CXX_WINDOWS) bin/main.o $(objssrc) $(sfml_include) $(static_flags) $(sfml_link) -Wall -o windows_build.exe
+	@echo -n "${ccreset}"
 
 windows: bin/main.o
 	@echo "uzywaj targetu windows_static, albo po prostu \"make\" "
 #	$(CXX_WINDOWS) bin/main.o $(sfml_link) $(objssrc) $(sfml_win) -o windows_build.exe 
 
 bin/main.o: $(objssrc)
-	@echo "compiling main.o"
+	@echo "${ccgreen}compiling main.o${ccyellow}"
 	$(CXX_WINDOWS) -c main.cpp $(sfml_include) $(sfml_link) $(static_flags) -Wall -o bin/main.o
-
+	@echo -n "${ccreset}"
 bin/%.o : %.cpp
+	@echo -n "${ccgreen}"
 	$(CXX_WINDOWS) -c $< $(sfml_include) $(sfml_link) $(static_flags) -Wall -o $@
+	@echo -n "${ccreset}"
 # $(shell find $(dirs) -name $(addsuffix ".cpp" , $(basename $(notdir $@))))
 #$(objssrc): $(SOURCES)
 #	@echo
