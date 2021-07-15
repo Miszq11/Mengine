@@ -2,11 +2,13 @@
 #include "src/RenderPipe.hpp"
 #include "src/ScenePipe.hpp"
 #include "src/game/mainscene.hpp"
+#include "src/engine.hpp"
 #include <iostream>
 
 int main(){
     sf::RenderWindow window(sf::VideoMode(500,500),"oknooooo");
     RenderPipe g;
+    engine eng;
     sf::CircleShape cir(50.f);
     cir.setFillColor(sf::Color::Blue);
 
