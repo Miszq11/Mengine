@@ -4,22 +4,24 @@
 
 void mainscene::input(sf::Event& ev){
     if(ev.type == sf::Event::KeyPressed){
-        if(ev.key.code == sf::Keyboard::A || ev.key.code == sf::Keyboard::Left){
-            dx += dx==0?-speed:0;}
+        if(ev.key.code == sf::Keyboard::A || ev.key.code == sf::Keyboard::Left)
+            dx += dx!=-speed?-speed:0;
         if(ev.key.code == sf::Keyboard::D || ev.key.code == sf::Keyboard::Right)
-            dx += dx==0?speed:0;
+            dx += dx!=speed?speed:0;
         if(ev.key.code == sf::Keyboard::W || ev.key.code == sf::Keyboard::Up)
-            dy += dy==0?-speed:0;
+            dy += dy!=-speed?-speed:0;
         if(ev.key.code == sf::Keyboard::S || ev.key.code == sf::Keyboard::Down)
-            dy += dy==0?speed:0;
+            dy += dy!=speed?speed:0;
     }
     if(ev.type == sf::Event::KeyReleased){
-        if(ev.key.code == sf::Keyboard::A || ev.key.code == sf::Keyboard::Left
-            || ev.key.code == sf::Keyboard::D || ev.key.code == sf::Keyboard::Right)
-                dx=0;
-        if(ev.key.code == sf::Keyboard::W || ev.key.code == sf::Keyboard::Up
-            || ev.key.code == sf::Keyboard::S || ev.key.code == sf::Keyboard::Down)
-                dy=0;
+        if(ev.key.code == sf::Keyboard::A || ev.key.code == sf::Keyboard::Left)
+            dx+=speed;
+        if(ev.key.code == sf::Keyboard::D || ev.key.code == sf::Keyboard::Right)
+            dx-=speed;
+        if(ev.key.code == sf::Keyboard::W || ev.key.code == sf::Keyboard::Up)
+            dy +=speed;        
+        if(ev.key.code == sf::Keyboard::S || ev.key.code == sf::Keyboard::Down)
+            dy-=speed;
     }
 }
 

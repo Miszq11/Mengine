@@ -6,7 +6,6 @@ void engine::run(){
 	while(window.isOpen() and not m_break_loop)
 		run_singe_iter();
 }
-static int iter = 0;
 void engine::run_singe_iter(){
 	sf::Event ev;
 	while(window.pollEvent(ev)){
@@ -15,10 +14,6 @@ void engine::run_singe_iter(){
             window.close();
 		}
 	double esttime = main_clock.restart().asMicroseconds();
-	if(iter++ > 100){
-		//std::cout<<" est time: "<< esttime << std::endl;
-		iter=0;
-	}
 	sc_pipe.update(esttime/1000000.f);
 	window.clear();
 	window.draw(rd_pipe);
@@ -53,9 +48,9 @@ sc_pipe(preinitregs::getsc_pipe())
 }
 
 void engine::init(){
-	//window.setFramerateLimit(120);
+	window.setFramerateLimit(240);
 	//window.setVerticalSyncEnabled(true);
-	window.setKeyRepeatEnabled(false);
+	//window.setKeyRepeatEnabled(false);
 }
 
 engine::~engine()
