@@ -9,12 +9,14 @@ class scene;
 
 class preinitregs
 {
-private:
+protected:
 	static RenderPipe rd_pipe;
 	static ScenePipe sc_pipe;
 public:
 	static void regdrawable(sf::Drawable&);
 	static void regscene(scene&);
+	static RenderPipe& getrd_pipe();
+	static ScenePipe& getsc_pipe();
 	preinitregs(/* args */);
 	~preinitregs();
 };

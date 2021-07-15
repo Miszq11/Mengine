@@ -1,9 +1,11 @@
 #include "register.hpp"
 #include "SFML/Graphics.hpp"
 #include "scene.hpp"
+#include <iostream>
 
 template<typename T>
 void util::obj_register<T>::_register(T& item){
+    std::cout<<"object register\n";
     reg.push_back(
         std::shared_ptr<T>(
             &item, 

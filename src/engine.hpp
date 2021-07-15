@@ -10,10 +10,11 @@ class engine
 private:
     bool m_break_loop;
     sf::RenderWindow window;
-    RenderPipe rd_pipe;
-    ScenePipe sc_pipe;
+    RenderPipe& rd_pipe;
+    ScenePipe& sc_pipe;
     sf::Clock main_clock;
     /* data */
+    void init();
 public:
     void run();
     void run_singe_iter();
