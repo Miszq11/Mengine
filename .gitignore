@@ -5,3 +5,4 @@ SFML
 test
 *.txt
 *.exe
+.vscode

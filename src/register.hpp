@@ -2,7 +2,6 @@
 #include <vector>
 #include <memory>
 #include <iostream>
-#include "SFML/Graphics.hpp"
 
 namespace util{
     template <typename T>

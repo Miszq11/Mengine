@@ -32,7 +32,7 @@ window(sf::VideoMode(constants.wind_width,constants.wind_heigh),constants.wind_n
 
 engine::engine():
 m_break_loop(false),
-window(sf::VideoMode(1920,720),"app")
+window(sf::VideoMode(1080,720),"app")
 {}
 
 engine::~engine()

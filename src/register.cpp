@@ -1,4 +1,6 @@
 #include "register.hpp"
+#include "SFML/Graphics.hpp"
+#include "scene.hpp"
 
 template<typename T>
 void util::obj_register<T>::_register(T& item){
@@ -20,3 +22,4 @@ void util::obj_register<T>::_unregister(T& item_arg){
 
 //explicit template declaration for stupido compilator to know what to do...
 template class util::obj_register<sf::Drawable>;
+template class util::obj_register<scene>;
