@@ -5,6 +5,7 @@ sfml_win:= -lsfml-graphics -lsfml-system -lsfml-window -std=c++2a -lstdc++
 sfml_include:= -ISFML/include
 sfml_link := -LSFML/lib
 static_flags:= -lstdc++  -lsfml-window-s -lsfml-graphics-s -lsfml-system-s -lstdc++ -DSFML_STATIC -static -lopengl32 -lwinmm -lgdi32 -lfreetype
+CXX_VER = -std=c++2a
 #-lsfml-window-s -lsfml-graphics-s -lsfml-system-s -lstdc++ -DSFML_STATIC -static -lopengl32 -lwinmm -lgdi32 -lfreetype
 CXXFLAGS += -std=c++2a
 dirs := src
@@ -33,7 +34,7 @@ windows_static: bin/main.o
 	@echo "${ccgreen}------------------------------------------------------------------------------------------------------------------------------------------------------------"
 	@echo "compiling and linking with objects: ${ccreset}$(objssrc)${ccgreen}"
 	@echo "------------------------------------------------------------------------------------------------------------------------------------------------------------${ccreset}"
-	$(CXX_WINDOWS) bin/main.o $(objssrc) $(sfml_include) $(static_flags) $(sfml_link) -Wall -o windows_build.exe
+	$(CXX_WINDOWS) bin/main.o $(objssrc) $(sfml_include) $(CXX_VER) $(static_flags) $(sfml_link) -Wall -o windows_build.exe
 	@echo -n "${ccreset}"
 
 windows: bin/main.o
@@ -42,11 +43,11 @@ windows: bin/main.o
 
 bin/main.o: $(objssrc)
 	@echo "${ccgreen}compiling main.o${ccyellow}"
-	$(CXX_WINDOWS) -c main.cpp $(sfml_include) $(sfml_link) $(static_flags) -Wall -o bin/main.o
+	$(CXX_WINDOWS) -c main.cpp $(sfml_include) $(CXX_VER) $(sfml_link) $(static_flags) -Wall -o bin/main.o
 	@echo -n "${ccreset}"
 bin/%.o : %.cpp
 	@echo -n "${ccgreen}"
-	$(CXX_WINDOWS) -c $< $(sfml_include) $(sfml_link) $(static_flags) -Wall -o $@
+	$(CXX_WINDOWS) -c $< $(sfml_include) $(CXX_VER) $(sfml_link) $(static_flags) -Wall -o $@
 	@echo -n "${ccreset}"
 # $(shell find $(dirs) -name $(addsuffix ".cpp" , $(basename $(notdir $@))))
 #$(objssrc): $(SOURCES)
