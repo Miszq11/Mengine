@@ -1,18 +1,16 @@
 #pragma once
+//#include "SFML/Graphics.hpp"
 
 class Physicsconstants
 {
-private:
-    /* data */
 public:
-    Physicsconstants(/* args */);
-    ~Physicsconstants();
+    static float gravity;
+    static enum  gr_t{
+        center,
+        down,
+        up,
+        left,
+        right} gravity_type;
+
 };
 
-Physicsconstants::Physicsconstants(/* args */)
-{
-}
-
-Physicsconstants::~Physicsconstants()
-{
-}

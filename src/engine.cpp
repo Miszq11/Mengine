@@ -48,7 +48,7 @@ sc_pipe(preinitregs::getsc_pipe())
 }
 
 void engine::init(){
-	window.setFramerateLimit(240);
+	//window.setFramerateLimit(240);
 	//window.setVerticalSyncEnabled(true);
 	//window.setKeyRepeatEnabled(false);
 }

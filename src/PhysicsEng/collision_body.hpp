@@ -1,19 +1,27 @@
 #pragma once
 #include "SFML/System/Mutex.hpp"
+#include "SFML/Graphics.hpp"
+
 class physics_body
 {
 private:
     sf::Mutex mutex;
     // fragile data lol
+    bool isstatic;
+protected:
+    void (*phys_fun)(double elapsed_time);
 public:
     //non-mutex members
     
     //mutex members
-    
-    
-    physics_body(/* args */);
+    void physic_run(double elapsed_time);
+    physics_body(sf::Sprite& sprt, bool isstatic = false);
+    physics_body(sf::Shape& sprt, bool isstatic = false);
     ~physics_body();
 };
+
+void default_phys_fun_rigid(double time);
+void default_phys_fun_static(double time);
 
 #include <memory>
 template<typename T>
